@@ -1,0 +1,44 @@
+```{r}
+library(ggplot2)
+Q1 <- read.csv("Q1.csv")
+Q3 <- read.csv("Q3.csv")
+Q4 <- read.csv("Q4.csv")
+```
+
+```{r}
+ggplot(Q1, aes(x= Q1$`Would you like to see any additions or changes to WCC service or programs? (Check all that apply)` )) +
+  geom_bar() +
+  coord_flip() +
+  labs(title = "Changes wanted to the WCC Services",
+       x= "Options",
+       y= "Count")
+```
+
+```{r}
+ggplot(Q3, aes(x= Q3$`Do you go to multiple WCC Mobile
+ Pantry (food trailer) sites?` )) +
+  geom_bar() +
+  labs(title = "Do you go to multiple WCC Mobile Pantries?",
+       x = "",
+       y= "%")
+```
+```{r}
+Q4 <- data.frame(name=c("Weekly", "Multiple times a week","Monthly","Every other week","<Once per month", "No answer", "Other"),  value=c(40,1,31,1,11,15,1))
+
+g <- factor(Q4$name, levels=c("No answer","Other","<Once per month","Monthly","Every other week","Weekly","Multiple times a week"))
+
+plott <- ggplot(Q4, aes(g,value)) + 
+         geom_bar(stat="identity") + 
+         geom_text(aes(label=signif(value)), nudge_y=2)
+
+plott + coord_flip() + ggtitle("Length of Time Using WCC") + xlab("Response") + ylab("Percentage")
+```
+
+```{r}
+ggplot(Q4, aes(x= How.often.do.you.come.to.any.of.the..WCC.mobile.sites. )) +
+  geom_bar(binwidth = 2) +
+  coord_flip() +
+  labs(title = "How often do you come to any of the WCC mobile sites?",
+       x= "Options",
+       y= "%")
+```
